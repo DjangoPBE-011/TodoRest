@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://127.0.0.1:8000/category/5/
+method: PUT
+body:
+  type: formdata
+  content:
+    - type: text
+      key: ""
+      value: ""
+      description: ""
+      disabled: true
+order: 2000

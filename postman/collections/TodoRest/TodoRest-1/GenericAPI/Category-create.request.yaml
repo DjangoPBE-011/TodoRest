@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://127.0.0.1:8000/category-create/
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: name
+      value: jhbkjgvhmvnjg
+      description: ""
+      disabled: false
+order: 2000

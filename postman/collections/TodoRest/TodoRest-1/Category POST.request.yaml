@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://127.0.0.1:8000/category/
+method: POST
+body:
+  type: json
+  content: |-
+    
+
+    {
+       "name":"Kurs ishlari"
+    }
+order: 556

@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://127.0.0.1:8000/category-generic/2/
+method: PATCH
+body:
+  type: formdata
+  content:
+    - type: text
+      key: name
+      value: Ishxonam ishlari
+      description: ""
+      disabled: false
+order: 5000

@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://127.0.0.1:8000/category-generic/
+method: GET
+body:
+  type: formdata
+  content:
+    - type: text
+      key: name
+      value: khjbnlnionl
+      description: ""
+      disabled: false
+order: 4000
