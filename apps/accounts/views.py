@@ -12,6 +12,17 @@ class ExampleView(APIView):
         query_params = request.query_params
         
         name = query_params.get('name')
-        fullname = query_params.get('fullname')
+      
         
-        return Response({"message": f"Hello, {name}!"}, status=status.HTTP_200_OK)
+        return Response({"message": query_params}, status=status.HTTP_200_OK)
+
+
+class Example2View(APIView):
+    
+    def get(self, request, *args, **kwargs):
+        
+        path_args = kwargs.get('pk')
+        
+        header = request.headers
+        
+        return Response({'message': path_args, 'headers': header}, status=status.HTTP_200_OK)
