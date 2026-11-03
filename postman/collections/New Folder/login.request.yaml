@@ -1,0 +1,32 @@
+$kind: http-request
+url: http://127.0.0.1:8000/accounts/login/
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: email
+      value: kvara6@gmail.com
+      description: ""
+      disabled: false
+    - type: text
+      key: password
+      value: odiljon199
+      description: ""
+      disabled: false
+    - type: text
+      key: confirm_password
+      value: odiljon199
+      description: ""
+      disabled: true
+    - type: text
+      key: first_name
+      value: Odiljon
+      description: ""
+      disabled: true
+    - type: text
+      key: last_name
+      value: Nuriddinov
+      description: ""
+      disabled: true
+order: 3000

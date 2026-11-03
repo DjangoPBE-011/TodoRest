@@ -1,0 +1,25 @@
+$kind: http-request
+url: http://127.0.0.1:8000/accounts/example2/4/
+method: GET
+headers:
+  - key: Cookie
+    value: "{wbkebnkdebckbwkdbcwjjfckwbn}"
+    disabled: false
+    description: ""
+  - key: Authorization
+    value: ""
+    disabled: true
+    description: ""
+body:
+  type: formdata
+  content:
+    - type: text
+      key: name
+      value: Odiljon
+      description: ""
+      disabled: false
+auth:
+  type: bearer
+  credentials:
+    token: dfgfhfjyjgtffuyikiuhyuklhgjhklhjhvkl
+order: 2000

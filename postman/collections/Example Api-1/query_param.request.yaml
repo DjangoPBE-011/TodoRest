@@ -1,0 +1,17 @@
+$kind: http-request
+url: http://127.0.0.1:8000/accounts/example/?name=Odiljon&fullname=Odiljon Nuriddinov
+method: GET
+queryParams:
+  - key: name
+    value: Odiljon
+    disabled: false
+    description: ""
+  - key: fullname
+    value: Odiljon Nuriddinov
+    disabled: false
+    description: ""
+  - key: ""
+    value: ""
+    disabled: true
+    description: ""
+order: 1000

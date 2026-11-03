@@ -10,28 +10,22 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
-import dotenv
-dotenv.load_dotenv()  
 from pathlib import Path
 
+import dotenv
+
+dotenv.load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = str(os.getenv('SECRET_KEY')) 
-# # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = str(os.getenv('DEBUG')) or True
-
 SECRET_KEY = os.getenv('SECRET_KEY')
 
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'True'
-
 
 ALLOWED_HOSTS = ["*"]
 
@@ -39,18 +33,20 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',                      # django.contrib.admin dan OLDIN turishi shart
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'rest_framework',
+
     'apps.accounts',
     'apps.todo',
     'apps.base',
-    
 ]
 
 MIDDLEWARE = [
@@ -87,42 +83,26 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('NAME'),
         'USER': os.getenv('USER'),
         'PASSWORD': os.getenv('PASSWORD'),
-        'HOST': os.getenv('HOST'),
-        'PORT': int(os.getenv('PORT')),
+        'HOST': os.getenv('HOST', 'localhost'),
+        'PORT': int(os.getenv('PORT', 5432)),
     }
 }
-
 
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 
@@ -138,21 +118,109 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.1/howto/static-files/
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+# Static & media files
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+    
+
+
+# from datetime import timedelta
+
+# ACCESS_TOKEN_LIFETIME_MINUTES = 60
+# REFRESH_TOKEN_LIFETIME_DAYS = 7
+
+# SIMPLE_JWT = {
+#     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=ACCESS_TOKEN_LIFETIME_MINUTES),
+#     "REFRESH_TOKEN_LIFETIME": timedelta(days=REFRESH_TOKEN_LIFETIME_DAYS),
+#     "ROTATE_REFRESH_TOKENS": False,
+#     "BLACKLIST_AFTER_ROTATION": True,
+#     "ALGORITHM": "HS256",
+#     "AUTH_HEADER_TYPES": ("Bearer",),
+# }
+
+
+
+# ---------------------------------------------------------------------------
+# Jazzmin (admin panel theme)
+# https://django-jazzmin.readthedocs.io/
+# ---------------------------------------------------------------------------
+
+JAZZMIN_SETTINGS = {
+    # sarlavhalar
+    "site_title": "Todo Admin",
+    "site_header": "Todo",
+    "site_brand": "Todo Admin",
+    "welcome_sign": "Admin panelga xush kelibsiz",
+    "copyright": "Todo Project",
+
+    # yuqoridagi qidiruv maydoni qaysi model bo'yicha qidiradi
+    "search_model": ["accounts.CustomUser"],
+
+    # foydalanuvchi avatari (CustomUser'da rasm maydoni bo'lsa, nomini yozing)
+    "user_avatar": None,
+
+    # yuqori menyu
+    "topmenu_links": [
+        {"name": "Bosh sahifa", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Saytni ochish", "url": "/", "new_window": True},
+    ],
+
+    # chap menyu
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "order_with_respect_to": ["accounts", "todo", "base", "auth"],
+
+    # ikonlar (Font Awesome 5)
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.Group": "fas fa-users",
+        "accounts.CustomUser": "fas fa-user",
+    },
+    "default_icon_parents": "fas fa-folder",
+    "default_icon_children": "fas fa-circle",
+
+    # model tahrirlash sahifasi ko'rinishi
+    "changeform_format": "horizontal_tabs",
+
+    # admin panelda temani jonli tanlash oynasi (tanlab bo'lgach False qiling)
+    "show_ui_builder": True,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "flatly",              # qora tema uchun: "darkly"
+    "dark_mode_theme": None,
+    "navbar": "navbar-dark",
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_child_indent": True,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+}

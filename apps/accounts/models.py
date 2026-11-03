@@ -9,9 +9,7 @@ class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='Email Address')
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, verbose_name='Avatar')
-    
-
-
+   
     objects = CustomUserManager()
     
     
@@ -24,6 +22,5 @@ class CustomUser(AbstractUser):
             verbose_name_plural = 'Users'
             
             
-
     def __str__(self):
         return self.email
