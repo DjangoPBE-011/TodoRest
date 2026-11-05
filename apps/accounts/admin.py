@@ -1,9 +1,16 @@
 from django.contrib import admin
-from .models import CustomUser
+
+from django.contrib.auth import get_user_model
+# from rest_framework.authtoken.models import Token
+
 # Register your models here.
 
+User = get_user_model()
 
-@admin.register(CustomUser)
-class CustomUserAdmin(admin.ModelAdmin):
+# admin.site.register(User)
+# admin.site.register(Token)
+
+@admin.register(User) 
+class UserAdmin(admin.ModelAdmin):
     list_display = ('id', 'email')
-    search_fields = ('username', 'email')
+   

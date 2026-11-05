@@ -14,7 +14,7 @@ class CustomUser(AbstractUser):
     
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['password']
+    REQUIRED_FIELDS = []
     
     
     class Meta:

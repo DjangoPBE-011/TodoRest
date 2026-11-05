@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import views
+from rest_framework.permissions import IsAuthenticated
+# from rest_framework.authentication import TokenAuthentication
 
 from rest_framework.generics import (
     ListAPIView, 
@@ -17,6 +19,7 @@ from .models import Category, Task
 # Create your views here.
 
 class CategoryView(views.APIView):
+    permission_classes = [IsAuthenticated]
     
     def get(self, request):
         categories = Category.objects.all()

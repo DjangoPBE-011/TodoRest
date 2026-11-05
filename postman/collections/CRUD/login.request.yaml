@@ -1,0 +1,44 @@
+$kind: http-request
+url: http://127.0.0.1:8000/category/
+method: GET
+headers:
+  - key: Authorization
+    value: Token 413957434f236dc1b4d2ad82cc4484ccbd31c445
+    disabled: true
+  - key: Authorization
+    value: "{{bearer_token_0a5m}}"
+    disabled: true
+    description: ""
+body:
+  type: formdata
+  content:
+    - type: text
+      key: email
+      value: kvara6@gmail.com
+      description: ""
+      disabled: true
+    - type: text
+      key: password
+      value: odiljon199
+      description: ""
+      disabled: true
+    - type: text
+      key: confirm_password
+      value: odiljon199
+      description: ""
+      disabled: true
+    - type: text
+      key: first_name
+      value: Odiljon
+      description: ""
+      disabled: true
+    - type: text
+      key: last_name
+      value: Nuriddinov
+      description: ""
+      disabled: true
+auth:
+  type: bearer
+  credentials:
+    token: ""
+order: 3000

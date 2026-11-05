@@ -6,7 +6,7 @@ body:
   content:
     - type: text
       key: email
-      value: kvara6@gmail.com
+      value: kvara699@gmail.com
       description: ""
       disabled: false
     - type: text
