@@ -1,4 +1,6 @@
+from django.urls import path
 from rest_framework import urls
+
 from .views import (
     CategoryView, 
     CategoryDetailUpdateView,
@@ -11,8 +13,10 @@ from .views import (
     CategoryRetrieveAPIView,
     CategoryUpdateAPIView,
     CategoryDestroyAPIView,
+    
+    ExampleView21,
     )
-from django.urls import path
+
 
 
 
@@ -29,4 +33,7 @@ urlpatterns = [
     urls.path('category-retrieve/<int:pk>/', CategoryRetrieveAPIView.as_view(), name='category-retrieve'),
     urls.path('category-update/<int:pk>/', CategoryUpdateAPIView.as_view(), name='category-update'),
     urls.path('category-destroy/<int:pk>/', CategoryDestroyAPIView.as_view(), name='category-destroy'),
+    
+    
+    urls.path('example21/', ExampleView21.as_view(), name='example21'),
 ]

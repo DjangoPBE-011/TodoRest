@@ -10,7 +10,7 @@ from rest_framework.generics import (
     UpdateAPIView, 
     DestroyAPIView,
     ListCreateAPIView, 
-    RetrieveUpdateDestroyAPIView, )
+    RetrieveUpdateDestroyAPIView,)
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import CategoryCreateSerializer, CategoryListSerializer, CategoryUpdateSerializer
@@ -118,3 +118,23 @@ class CategoryUpdateAPIView(UpdateAPIView):
 
 class CategoryDestroyAPIView(DestroyAPIView):
     queryset = Category.objects.all()
+    
+    
+    
+    
+from .serializers import ExampleSerializer21
+
+class ExampleView21(views.APIView):
+    permission_classes = [IsAuthenticated]
+    
+    
+    def get(request, *args, **kwargs):
+        data = {
+            "name": "Odiljon",
+            "age": 20,
+            "email": "neymar10@gmail.com"
+        }
+        serializer = ExampleSerializer21(data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+       
+   

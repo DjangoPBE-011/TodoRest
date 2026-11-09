@@ -167,65 +167,20 @@ SIMPLE_JWT = {
 }
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"  # SMTP server host
+EMAIL_PORT = 587  # SMTP server port (587 for TLS, 465 for SSL)
+EMAIL_USE_TLS = True  # True for TLS, False for SSL
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")  # SMTP server username
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_SSL = False  # Set to True if using SSL
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")  # Default sender email address
 
-# ---------------------------------------------------------------------------
-# Jazzmin (admin panel theme)
-# https://django-jazzmin.readthedocs.io/
-# ---------------------------------------------------------------------------
+FRONTEND_URL = os.getenv(
+    "FRONTEND_URL",
+    "http://localhost:3000",
+)
 
-JAZZMIN_SETTINGS = {
-    # sarlavhalar
-    "site_title": "Todo Admin",
-    "site_header": "Todo",
-    "site_brand": "Todo Admin",
-    "welcome_sign": "Admin panelga xush kelibsiz",
-    "copyright": "Todo Project",
 
-    # yuqoridagi qidiruv maydoni qaysi model bo'yicha qidiradi
-    "search_model": ["accounts.CustomUser"],
 
-    # foydalanuvchi avatari (CustomUser'da rasm maydoni bo'lsa, nomini yozing)
-    "user_avatar": None,
-
-    # yuqori menyu
-    "topmenu_links": [
-        {"name": "Bosh sahifa", "url": "admin:index", "permissions": ["auth.view_user"]},
-        {"name": "Saytni ochish", "url": "/", "new_window": True},
-    ],
-
-    # chap menyu
-    "show_sidebar": True,
-    "navigation_expanded": True,
-    "order_with_respect_to": ["accounts", "todo", "base", "auth"],
-
-    # ikonlar (Font Awesome 5)
-    "icons": {
-        "auth": "fas fa-users-cog",
-        "auth.Group": "fas fa-users",
-        "accounts.CustomUser": "fas fa-user",
-    },
-    "default_icon_parents": "fas fa-folder",
-    "default_icon_children": "fas fa-circle",
-
-    # model tahrirlash sahifasi ko'rinishi
-    "changeform_format": "horizontal_tabs",
-
-    # admin panelda temani jonli tanlash oynasi (tanlab bo'lgach False qiling)
-    "show_ui_builder": True,
-}
-
-JAZZMIN_UI_TWEAKS = {
-    "theme": "flatly",              # qora tema uchun: "darkly"
-    "dark_mode_theme": None,
-    "navbar": "navbar-dark",
-    "sidebar": "sidebar-dark-primary",
-    "sidebar_nav_child_indent": True,
-    "button_classes": {
-        "primary": "btn-primary",
-        "secondary": "btn-secondary",
-        "info": "btn-info",
-        "warning": "btn-warning",
-        "danger": "btn-danger",
-        "success": "btn-success",
-    },
-}
+from .jazzmin_conf import JAZZMIN_SETTINGS #noqa

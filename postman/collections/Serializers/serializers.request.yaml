@@ -1,0 +1,22 @@
+$kind: http-request
+url: http://127.0.0.1:8000/accounts/login/
+method: POST
+headers:
+  - key: Authorization
+    value: Token
+    disabled: true
+    description: ""
+body:
+  type: formdata
+  content:
+    - type: text
+      key: email
+      value: neymar10@gmail.com
+      description: ""
+      disabled: false
+    - type: text
+      key: password
+      value: "1234"
+      description: ""
+      disabled: false
+order: 3000

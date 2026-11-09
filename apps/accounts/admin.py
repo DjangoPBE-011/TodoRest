@@ -12,5 +12,5 @@ User = get_user_model()
 
 @admin.register(User) 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'email')
+    list_display = ('email',)
    
